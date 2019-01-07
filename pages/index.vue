@@ -1,65 +1,78 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center>
-    <v-flex
-      xs12
-      sm8
-      md6>
-      <div class="text-xs-center">
-        <logo/>
-        <vuetify-logo/>
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>For more information on Vuetify, check out the <a
-            href="https://vuetifyjs.com"
-            target="_blank">documentation</a>.</p>
-          <p>If you have questions, please join the official <a
-            href="https://chat.vuetifyjs.com/"
-            target="_blank"
-            title="chat">discord</a>.</p>
-          <p>Find a bug? Report it on the github <a
-            href="https://github.com/vuetifyjs/vuetify/issues"
-            target="_blank"
-            title="contribute">issue board</a>.</p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank">Nuxt Documentation</a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank">Nuxt GitHub</a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn
-            color="primary"
-            flat
-            nuxt
-            to="/inspire">Continue</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+  <v-layout column>
+    <v-layout column justify-center>
+      <v-parallax height="800" dark src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2890%29.png">
+        <v-layout column align-center justify-center>
+          <h1 class="display-3 font-weight-medium mb-3">Amor</h1>
+          <h3 class="display-1 font-weight-medium">Welcom to my blog!</h3>
+        </v-layout>
+      </v-parallax>
+    </v-layout>
+
+    <v-layout wrap justify-center>
+      <v-flex xs12 sm10 md8 lg6 xl6 v-for="article in articles" :key="article.id" mt-5 ml-2 mr-2>
+        <v-card class="article-card">
+          <v-img class="white--text" height="250px" :src="article.src">
+            <v-container dark-background fill-height fluid>
+              <v-layout fill-height justify-center align-center>
+                <h1 class="display-2 font-weight-medium mb-3">{{article.title}}</h1>
+              </v-layout>
+            </v-container>
+          </v-img>
+        </v-card>
+      </v-flex>
+    </v-layout>
+
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  }
-}
+  components: {},
+  data() {
+    return {
+      articles: [
+        {
+          id: 0,
+          title: "Django",
+          src: "https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2820%29.png"
+        },
+        {
+          id: 1,
+          title: "Flask",
+          src: "https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2821%29.png"
+        },
+        {
+          id: 2,
+          title: "Docker",
+          src: "https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2822%29.png"
+        },
+        {
+          id: 3,
+          title: "Spring",
+          src: "https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2823%29.png"
+        },
+        {
+          id: 4,
+          title: "Python",
+          src: "https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2825%29.png"
+        }
+      ]
+    }
+  },
+};
 </script>
+
+<style lang="stylus" scoped>
+.dark-background
+  background-color rgba(0,0,0,.5)
+.article-card
+  width 100%
+  border-radius 10px
+  transition width .3s
+  -moz-transition width .3s
+  -webkit-transition width .3s
+  -o-transition width .3s
+.article-card:hover
+  width 100%
+</style>
