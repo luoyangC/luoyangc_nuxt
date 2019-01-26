@@ -1,2 +1,84 @@
 // Import Vuetify styling
 @require '~vuetify/src/stylus/main.styl'
+
+a
+  color #00838F
+  text-decoration none
+
+code
+  margin 0 10px
+  padding 0 10px
+  border solid 1px #e1e4e5
+  font-size 0.95em
+  font-family SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace !important
+  box-shadow none !important
+  background-color #f8f8f8
+
+code:before, code:after
+    content ''
+
+.hljs
+  margin 10px !important
+  padding 0 !important
+  border solid 1px #e1e4e5
+  background-color #f8f8f8 !important
+  code
+    margin 0 !important
+    border none !important
+    width 1em !important
+    white-space pre !important
+    word-break keep-all !important
+    text-overflow ellipsis !important
+    background-color rgba(0,0,0,0) !important
+
+.application
+  font-weight normal
+  font-family "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif
+
+.application.theme--light
+  background-image url('./light.png') !important
+  background-attachment fixed
+
+.application.theme--dark
+  background-image url('./dark.png') !important
+  background-attachment fixed
+
+.page-enter-active, .page-leave-active
+  transition opacity .5s
+
+.page-enter, .page-leave-active
+  opacity 0
+
+.dark-back
+  background-color rgba(0,0,0,.5)
+  margin 0 -1rem
+
+.active-disabled
+  display none
+
+.title-text
+  font-family 'Telefon Black',Sans-Serif !important
+  color white !important
+  -webkit-text-stroke 2px black !important
+  -webkit-font-smoothing antialiased !important
+
+.sentence-text
+  padding 20px
+  font-family STXingkai !important
+  font-size 1.5em
+  color white
+
+.line-text
+  font-size 1.2em
+  line-height: 38px
+  font-family 'Telefon Black',Sans-Serif
+  -webkit-transition: all ease .3s
+  -moz-transition: all ease .3s
+  -ms-transition: all ease .3s
+  transition: all ease .3s
+
+.line-text:hover
+  font-size 1.5em
+
+.display-2
+  font-size 2.2em !important

@@ -9,7 +9,7 @@
       </v-card-title>
       <v-card-actions>
         <v-layout justify-space-around>
-          <v-btn round outline depressed large nuxt to="/inspire">GitHub</v-btn>
+          <v-btn round outline depressed large href="https://github.com/luoyangC/luoyangc_nuxt">GitHub</v-btn>
           <v-btn round outline depressed large nuxt to="/inspire">Start</v-btn>
         </v-layout>
       </v-card-actions>
@@ -23,7 +23,7 @@ export default {
     return {
       sentence: {
         list: ["醉后不知天在水", "满船清梦压星河"]
-      }
+      } 
     }
   },
 };
@@ -35,5 +35,5 @@ export default {
   writing-mode vertical-rl
   padding-bottom 50px
   font-family STXingkai !important
-  font-size 40px
+  font-size 2.5em
 </style>

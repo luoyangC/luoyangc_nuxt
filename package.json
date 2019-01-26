@@ -1,5 +1,5 @@
 {
-  "name": "luoyangc_nuxt",
+  "name": "amor",
   "version": "1.0.0",
   "description": "My impressive Nuxt.js project",
   "author": "luoyangC",
@@ -11,11 +11,15 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "cookie-universal-nuxt": "^2.0.14",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0",
+    "highlight.js": "^9.13.1",
     "koa": "^2.5.2",
-    "vuetify": "^1.2.4",
-    "@nuxtjs/axios": "^5.0.0"
+    "markdown-it": "^8.4.2",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "vuetify": "^1.2.4"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
