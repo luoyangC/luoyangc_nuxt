@@ -10,8 +10,19 @@ import mutations from './mutations'
 //全局注册vueX
 Vue.use(Vuex)
 
+const windowSize = {x: 0, y: 0}
+
+const randomImage = []
+
+const currentUser = { id: null, image: '/icons/icon-a.png' }
+
+const articleParams = {}
+
 const state = {
-  windowSize: {x: 0, y: 0}
+  windowSize,
+  randomImage,
+  currentUser,
+  articleParams,
 }
 
 export default () => new Vuex.Store({

@@ -53,6 +53,9 @@ code:before, code:after
   background-color rgba(0,0,0,.5)
   margin 0 -1rem
 
+.dark-background
+  background-color rgba(0,0,0,.5)
+
 .active-disabled
   display none
 
@@ -82,3 +85,16 @@ code:before, code:after
 
 .display-2
   font-size 2.2em !important
+
+.rotate
+  -webkit-transition: 1s ease all
+  -moz-transition: 1s ease all
+  -ms-transition: 1s ease all
+  -o-transition: 1s ease all
+  transition: 1s ease all
+.rotate:hover
+  -webkit-transform: rotate(360deg)
+  -moz-transform: rotate(360deg)
+  -ms-transform: rotate(360deg)
+  -o-transform: rotate(360deg)
+  transform: rotate(360deg)

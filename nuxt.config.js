@@ -10,11 +10,11 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'icons/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/icons/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
@@ -23,16 +23,18 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: {
-    duration: 10000,
+    duration: 20000,
     color: '#00838f',
-    height: '2px'
+    height: '3px'
   },
 
   /*
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl',
+    '~/static/style/app.styl',
+    '~/static/font/iconfont.css',
+    '~/static/live2d/css/live2d.css',
     '~/node_modules/highlight.js/styles/a11y-light.css'
   ],
 
@@ -40,8 +42,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/axios',
-    '@/plugins/vuetify',
+    { src: '@/plugins/vuetify', ssr: true },
+    { src: "@/plugins/axios", ssr: true },
+    { src: '@/static/font/iconfont.js', ssr: false },
   ],
 
   /*
@@ -51,8 +54,6 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    ['cookie-universal-nuxt', { alias: 'cookiz' }],
-
   ],
   /*
   ** Axios module configuration

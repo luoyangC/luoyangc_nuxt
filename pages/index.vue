@@ -3,8 +3,8 @@
     <v-card color="rgba(255,255,255,0)" flat>
       <v-card-title >
         <v-layout align-center align-text>
-          {{sentence.list[0]}}<br>
-          {{sentence.list[1]}}<br>
+          {{sentence.lines[0]}}<br>
+          {{sentence.lines[1]}}<br>
         </v-layout>
       </v-card-title>
       <v-card-actions>
@@ -19,11 +19,10 @@
 
 <script>
 export default {
-  async asyncData() {
+  async asyncData({$axios}) {
+    let {data} = await $axios.get(`/sentence/1/`)
     return {
-      sentence: {
-        list: ["醉后不知天在水", "满船清梦压星河"]
-      } 
+      sentence: data
     }
   },
 };

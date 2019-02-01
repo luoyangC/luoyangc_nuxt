@@ -1,11 +1,22 @@
 <template>
   <v-layout column>
 
-    <jumbotron-card :height="parallaxHeight" title="Luoyang's Blog" lines="深林人不知，明月来相照" image="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2890%29.png"/>
+    <jumbotron-card :height="parallaxHeight" title="Luoyang's Blog" :lines="randomSentence" :image="currentImage"/>
 
     <v-layout wrap justify-center>
       <v-flex xs12 sm10 md8 lg6 xl6 v-for="article in articles" :key="article.id" mb-5 mt-2 ml-2 mr-2>
         <article-card :article="article" :articleHeight="articleHeight"></article-card>
+      </v-flex>
+      <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2 v-if="articles.length === 0">
+        <v-card>
+          <v-img class="white--text" :height="articleHeight" :src="currentImage">
+          <v-container dark-background fill-height fluid>
+            <v-layout column fill-height justify-center align-center>
+              <h1 class="display-2 font-weight-medium mb-3">抱歉，没有更多内容</h1>
+            </v-layout>
+          </v-container>
+          </v-img>
+        </v-card>
       </v-flex>
     </v-layout>
 
@@ -25,29 +36,35 @@
 <script>
 import ArticleCard from '@/components/article-card'
 import JumbotronCard from '@/components/jumbotron-card'
-import { getArticle } from '@/api'
 
 export default {
 
-  components: { ArticleCard, JumbotronCard },
+  components: {
+    ArticleCard,
+    JumbotronCard
+  },
 
-  async asyncData({app}) {
-    let {data} = await getArticle()
+  async asyncData({app, store, $axios}) {
+    let imageId = app.store.getters.cartRandomImage[0] || 100
+    let sentence = await $axios.get(`/sentence/`)
+    let articles = await $axios.get(`/article/`, {params: store.getters.cartArticleParams})
     return {
-      next: data.next,
-      prev: data.previous,
-      articles: data.results
+      next: articles.data.next,
+      prev: articles.data.previous,
+      articles: articles.data.results,
+      sentence: sentence.data,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
     }
   },
 
   methods: {
     async changePage(page) {
       this.$vuetify.goTo(0, {duration: 500, offset: this.parallaxHeight, easing: 'easeInOutCubic'})
-      let data = await this.$axios.get(`https${page.slice(4)}`)
+      let { data } = await this.$axios.get(page)
       this.next = data.next
       this.prev = data.previous
       this.articles = data.results
-    }
+    },
   },
 
   computed: {
@@ -61,10 +78,23 @@ export default {
       if (this.windowSize.x < 960) return 200
       else return 250
     },
+    randomSentence() {
+      let sentenceId = Math.floor(Math.random() * (this.sentence.length - 0))
+      return this.sentence[sentenceId].lines.join('，')
+    },
+    articleParams() {
+      return this.$store.getters.cartArticleParams
+    }
   },
+
+  watch: {
+    async articleParams(value) {
+      let { data } = await this.$axios.get(`/article/`, {params: value})
+      this.next = data.next
+      this.prev = data.previous
+      this.articles = data.results
+    }
+  }
 
 };
 </script>
-
-<style lang="stylus" scoped>
-</style>

@@ -4,7 +4,7 @@
     <v-navigation-drawer :clipped="clipped" v-model="drawer" width="350" temporary app @input="navigation">
 
       <v-layout mt-3>
-        <v-btn absolute left fab flat nuxt to="/inspire" active-class="active-disabled">
+        <v-btn absolute left fab flat active-class="active-disabled" @click="setArticleParams('default')">
           <v-icon>home</v-icon>
         </v-btn>
         <v-btn absolute right fab flat @click="drawer = !drawer">
@@ -13,9 +13,20 @@
       </v-layout>
 
       <v-layout justify-center mt-5 mb-2>
-        <v-hover>
+        <v-hover v-if="currentUser.id">
           <v-avatar slot-scope="{ hover }" size="100" color="grey lighten-4">
-            <img src="images/user/icon-a.png" alt="avatar">
+            <img :src="currentUser.image" alt="avatar">
+            <v-expand-transition>
+              <v-card v-if="hover" class="transition-fast-in-fast-out v-card--reveal" ripple nuxt to="/user">
+                <v-icon large dark>touch_app</v-icon>
+              </v-card>
+            </v-expand-transition>
+          </v-avatar>
+        </v-hover>
+
+        <v-hover v-else>
+          <v-avatar slot-scope="{ hover }" size="100" color="grey lighten-4">
+            <img src="/icons/icon-a.png" alt="avatar">
             <v-expand-transition>
               <v-card v-if="hover" class="transition-fast-in-fast-out v-card--reveal" ripple nuxt to="/login">
                 <v-icon large dark>fingerprint</v-icon>
@@ -26,7 +37,7 @@
       </v-layout>
 
       <v-layout pl-3 pr-3>
-        <v-text-field label="search" append-icon="search"></v-text-field>
+        <v-text-field label="search" v-model="search" append-icon="search" @keydown.enter="setArticleParams('search')"></v-text-field>
       </v-layout>
 
       <v-layout class="nav-footer" justify-center>
@@ -62,7 +73,7 @@
             <v-list-tile-title class="text-xs-center">归档</v-list-tile-title>
           </v-list-tile>
 
-          <v-list-tile v-for="(item, i) in archives"  :key="i" router exact @click="drawer = !drawer">
+          <v-list-tile v-for="(item, i) in archives"  :key="i" router exact @click="setArticleParams('time', item)">
             <v-list-tile-content>
               <v-list-tile-title class="text-xs-center" v-text="item"/>
             </v-list-tile-content>
@@ -74,7 +85,7 @@
             <v-list-tile-title class="text-xs-center">分类</v-list-tile-title>
           </v-list-tile>
 
-          <v-list-tile v-for="(item, i) in categories" :to="item.to" :key="i" router exact @click="drawer = !drawer">
+          <v-list-tile v-for="(item, i) in categories" :to="item.to" :key="i" router exact @click="setArticleParams('category', item.id)">
             <v-list-tile-content>
               <v-list-tile-title class="text-xs-center" v-text="item.title"/>
             </v-list-tile-content>
@@ -103,6 +114,8 @@
     <v-content>
       <nuxt/>
 
+      <live-card></live-card>
+
       <v-btn fixed bottom right fab @click="arrowUp" :style="{'opacity':opacityUp}" color="rgba(255,255,255,.2)">
         <v-icon>arrow_upward</v-icon>
       </v-btn>
@@ -113,7 +126,7 @@
       <v-layout column justify-center align-center>
         <v-layout>&copy; 2019</v-layout>
         <v-layout justify-center align-center >
-          <v-img height="20" width="20" src="icons/beiantubiao.png"/>
+          <v-img height="20" width="20" src="/icons/beiantubiao.ico"/>
           <a href="http://www.miitbeian.gov.cn" rel="external nofollow">&nbsp;渝 ICP 备 18014351 号&nbsp;</a>
         </v-layout>
       </v-layout>
@@ -123,76 +136,110 @@
 </template>
 
 <script>
+import LiveCard from '@/components/live-card'
 import moment from 'moment'
-import { getCategory, getArchives } from '@/api'
 
 export default {
+  components: {
+    LiveCard,
+  },
   data() {
     return {
+      search: '',
+      title: "Amor的博客",
       musicFrame: false,
       fontSlider: false,
-      fontSize: 16,
-      offsetTop: 0,
       clipped: false,
       drawer: false,
       dark: false,
+      fontSize: 16,
+      offsetTop: 0,
+      archives: [],
+      categories: [],
       pages: [
         { icon: "event_note", title: "记录", to: "/archives" },
         { icon: "chat", title: "留言", to: "/message" },
         { icon: "create", title: "动态", to: "/cross" },
         { icon: "recent_actors", title: "关于", to: "/about" },
       ],
-      archives: [
-      ],
-      categories: [
-        { title: "python" },
-        { title: "java" },
-        { title: "vue" },
-        { title: "算法" },
-      ],
-      title: "Amor的博客"
     };
   },
   methods: {
+    // 侧边栏变化时回调函数
     navigation(e) {
       if (!e) {
         this.fontSlider = false
         this.musicFrame = false
       }
     },
+    // 根据时间自动切换夜间模式
     autoDark() {
       let now = new Date
       let hours = now.getHours()
-      if (6 <= hours <= 18) {
+      if (hours <= 6 || hours <= 18) {
         this.dark = false
       } else {
         this.dark = true
       }
     },
+    // 回到顶部
     arrowUp() {
       this.$vuetify.goTo(0, {duration: 500, offset: 0, easing: 'easeInOutCubic'})
     },
+    // 页面滚动时回调函数
     onScroll(e) {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
     },
+    // 时间处理函数
+    timeFormat(time) {
+      return moment(time).format('MMM DD YYYY')
+    },
+    // 窗口改变时回调函数
     onResize() {
       this.$store.commit('setWindowSize', { x: window.innerWidth, y: window.innerHeight })
     },
-    timeFormat (time) {
-      return moment(time).format('MMM DD YYYY')
+    // 随机生成顶部图片
+    randomImage() {
+      let randomImage = []
+      for (let index = 0; index < 10; index++) {
+        randomImage.push(Math.floor(Math.random() * (100 - 0)))
+      }
+      this.$store.commit('setRandomImage', randomImage)
     },
+    // 设置文章的过滤参数
+    setArticleParams(type, params) {
+      let data
+      if (type == 'category') {
+        data = {category: params}
+      } else if (type == 'time') {
+        data = {time: moment(params).format('YYYY-MM')}
+      } else if (type == 'search') {
+        data = {search: this.search}
+        this.search = ''
+      } else if (type == 'default') {
+        data = {}
+      }
+      this.drawer = false
+      this.$store.commit('setArticleParams', data)
+      this.$router.push('/inspire')
+    },
+    // 获取接口数据
     async getData() {
       // 获取分类数据
-      let categories = await getCategory()
+      let categories = await this.$axios.get(`/category/`)
       this.categories = categories.data
       // 获取归档数据
-      let archives = await getArchives()
+      let archives = await this.$axios.get(`/archive/`)
       archives.data.forEach(element => {
         this.archives.push(moment(element.archive).format('MMM DD YYYY'))
       })
+      // 获取用户信息
+      let user = await this.$axios.get(`/user/`)
+      this.$store.commit('setCurrentUser', user.data)
     }
   },
   computed: {
+    // 计算回到顶部按钮是否显示
     opacityUp() {
       if (this.offsetTop < 1000) {
         return 0
@@ -200,17 +247,24 @@ export default {
         return (this.offsetTop - 1000) / 200
       }
     },
+    // 计算窗口尺寸
     windowSize() {
       return this.$store.state.windowSize
     },
+    // 计算滚动高度是否低于顶部图片高度
     outParallax() {
       let height = (this.windowSize.x + this.windowSize.y) / 4
       if (this.offsetTop <= height) {
         return 'dark'
       }
     },
+    // 计算当前的登录用户
+    currentUser() {
+      return this.$store.getters.cartCurrentUser
+    }
   },
   created() {
+    this.randomImage()
     this.autoDark()
     this.getData()
   },

@@ -1,14 +1,15 @@
 <template>
   <v-layout column>
     <v-layout column justify-center mb-5>
-      <v-parallax :height="parallaxHeight" dark src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%2866%29.png">
-        <v-layout column align-center justify-center dark-back>
+
+      <v-img :height="parallaxHeight" :src="currentImage">
+        <v-layout column align-center justify-center fill-height dark-back>
           <v-avatar size="150" color="grey lighten-4">
-            <img class="rotate" src="images/user/icon-a.png" alt="avatar">
+            <img class="rotate" src="/icons/icon-a.png" alt="avatar">
           </v-avatar>
           <h1 class="title-text font-weight-bold display-2 mb-3">Amor</h1>
         </v-layout>
-      </v-parallax>
+      </v-img>
     </v-layout>
 
     <v-layout wrap justify-center>
@@ -69,11 +70,28 @@
 
     </v-layout>
 
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md8 lg6 xl6>
+        <v-layout justify-space-between>
+          <v-btn round outline nuxt to="/cross">动态</v-btn>
+          <v-spacer/>
+          <v-btn round outline nuxt to="/inspire">文章</v-btn>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+
   </v-layout>
 </template>
 
 <script>
 export default {
+  async asyncData({app}) {
+    let imageId = app.store.getters.cartRandomImage[4] || 100
+    return {
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+    }
+  },
+  
   computed: {
     windowSize() {
       return this.$store.state.windowSize
@@ -84,18 +102,3 @@ export default {
   },
 }
 </script>
-
-<style lang="stylus" scoped>  
-.rotate
-  -webkit-transition: 1s ease all
-  -moz-transition: 1s ease all
-  -ms-transition: 1s ease all
-  -o-transition: 1s ease all
-  transition: 1s ease all
-.rotate:hover
-  -webkit-transform: rotate(360deg)
-  -moz-transform: rotate(360deg)
-  -ms-transform: rotate(360deg)
-  -o-transform: rotate(360deg)
-  transform: rotate(360deg)
-</style>

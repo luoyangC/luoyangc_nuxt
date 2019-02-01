@@ -1,10 +1,10 @@
 <template>
   <v-card class="article-card" nuxt :to="'/content/' + article.id">
-    <v-img class="white--text" :height="articleHeight" :src="article.image_url">
+    <v-img class="white--text" :height="articleHeight" :src="article.image">
       <v-container dark-background fill-height fluid>
         <v-layout column fill-height justify-center align-center>
           <h1 class="display-2 font-weight-medium mb-3">{{article.title}}</h1>
-          <h3>{{timeFormat(article.update_time)}} • {{article.category}}</h3>
+          <h3>{{articleTime}} • {{article.category}}</h3>
         </v-layout>
       </v-container>
     </v-img>
@@ -19,18 +19,15 @@ export default {
     article: Object,
     articleHeight: Number,
   },
-  methods: {
-    timeFormat (time) {
-      return moment(time).format('YYYY年MM月DD日')
-    },
+  computed: {
+    articleTime() {
+      return moment(this.article.update_time).format('YYYY年MM月DD日')
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.dark-background
-  background-color rgba(0,0,0,.5)
-
 .article-card
   width 100%
   border-radius: .5rem
