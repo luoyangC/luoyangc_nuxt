@@ -2,11 +2,10 @@ import qs from 'qs'
 
 export default ({ app }) => {
 
-  let axios = app.$axios
+  const axios = app.$axios
 
   axios.defaults.timeout = 5000
-  axios.defaults.baseURL = 'http://127.0.0.1:8000/api'
-  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+  axios.defaults.baseURL = 'https://luoyangc.cn/api/'
 
   axios.onRequest(config => {
     let token = app.$cookies.get('token')

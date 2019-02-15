@@ -11,6 +11,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+      { hid: 'keywords', name: 'keywords', content: '骆杨的博客' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [

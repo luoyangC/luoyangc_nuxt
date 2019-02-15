@@ -14,7 +14,7 @@ const windowSize = {x: 0, y: 0}
 
 const randomImage = []
 
-const currentUser = { id: null, image: '/icons/icon-a.png' }
+const currentUser = { id: null, image: '/icons/xigua.png' }
 
 const articleParams = {}
 

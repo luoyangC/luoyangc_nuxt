@@ -1,7 +1,19 @@
 <template>
   <v-layout column>
 
-    <jumbotron-card :height="parallaxHeight" title="Luoyang's Blog" :lines="randomSentence" :image="currentImage"/>
+    <v-layout column justify-center mb-5>
+      <v-img :height="parallaxHeight" :src="currentImage">
+        <v-layout column align-center justify-end dark-back fill-height pt-5>
+          <v-layout wrap justify-center align-content-end>
+            <h1 class="title-text mb-3">Luoyang's Blog</h1>
+          </v-layout>
+          <v-layout wrap justify-center align-content-start>
+            <h2 class="sentence-text">{{randomSentence[0]}}</h2>
+            <h2 class="sentence-text">{{randomSentence[1]}}</h2>
+          </v-layout>
+        </v-layout>
+      </v-img>
+    </v-layout>
 
     <v-layout wrap justify-center>
       <v-flex xs12 sm10 md8 lg6 xl6 v-for="article in articles" :key="article.id" mb-5 mt-2 ml-2 mr-2>
@@ -35,13 +47,11 @@
 
 <script>
 import ArticleCard from '@/components/article-card'
-import JumbotronCard from '@/components/jumbotron-card'
 
 export default {
 
   components: {
     ArticleCard,
-    JumbotronCard
   },
 
   async asyncData({app, store, $axios}) {
@@ -53,14 +63,14 @@ export default {
       prev: articles.data.previous,
       articles: articles.data.results,
       sentence: sentence.data,
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
     }
   },
 
   methods: {
     async changePage(page) {
-      this.$vuetify.goTo(0, {duration: 500, offset: this.parallaxHeight, easing: 'easeInOutCubic'})
-      let { data } = await this.$axios.get(page)
+      this.$vuetify.goTo(0, {duration: 1000, offset: this.parallaxHeight, easing: 'easeInOutCubic'})
+      let { data } = await this.$axios.get('https' + page.slice(4))
       this.next = data.next
       this.prev = data.previous
       this.articles = data.results
@@ -80,7 +90,7 @@ export default {
     },
     randomSentence() {
       let sentenceId = Math.floor(Math.random() * (this.sentence.length - 0))
-      return this.sentence[sentenceId].lines.join('，')
+      return this.sentence[sentenceId].lines
     },
     articleParams() {
       return this.$store.getters.cartArticleParams
@@ -98,3 +108,10 @@ export default {
 
 };
 </script>
+
+<style lang="stylus">
+.sentence-text
+  padding 0 20px
+  font-family STXingkai, FangSong, SimSun !important
+  color white
+</style>

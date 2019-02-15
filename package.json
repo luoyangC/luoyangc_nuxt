@@ -1,7 +1,7 @@
 {
   "name": "amor",
   "version": "1.0.0",
-  "description": "My impressive Nuxt.js project",
+  "description": "骆杨的个人博客，内容主要包括Vue前端和Django后端的一些技术文章，也包括个人的一些学习体会和日记随笔等",
   "author": "luoyangC",
   "private": true,
   "scripts": {
@@ -18,10 +18,8 @@
     "koa": "^2.5.2",
     "markdown-it": "^8.4.2",
     "moment": "^2.24.0",
-    "nuxt": "^2.0.0",
-    "vuetify": "^1.2.4"
-  },
-  "devDependencies": {
+    "nuxt": "~2.3.0  ",
+    "vuetify": "^1.2.4",
     "nodemon": "^1.11.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"

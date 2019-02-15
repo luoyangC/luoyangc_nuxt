@@ -3,7 +3,7 @@
     <v-img class="white--text" :height="articleHeight" :src="article.image">
       <v-container dark-background fill-height fluid>
         <v-layout column fill-height justify-center align-center>
-          <h1 class="display-2 font-weight-medium mb-3">{{article.title}}</h1>
+          <h1 class="mb-3">{{article.title}}</h1>
           <h3>{{articleTime}} • {{article.category}}</h3>
         </v-layout>
       </v-container>

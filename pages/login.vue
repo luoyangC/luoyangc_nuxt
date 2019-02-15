@@ -2,7 +2,7 @@
   <v-layout fill-height>
     <v-layout align-center justify-center>
 
-      <v-flex xs12 sm10 md8 lg6 xl4 mb-5 mt-2 ml-2 mr-2>
+      <v-flex xs12 sm10 md8 lg6 xl4 mb-5>
         <v-tabs v-model="active" dark height="300" slider-color="yellow">
 
           <v-img :src="currentImage" aspect-ratio="2">
@@ -27,7 +27,7 @@
               <v-card-actions> 
                 <v-layout column align-center pl-5 pr-5>
                   <v-btn round large color="primary" @click.stop="login">登录</v-btn>
-                  <v-layout mt-5>————— 社交帐号登录 —————</v-layout>
+                  <v-layout mt-5>——— 社交帐号登录 ———</v-layout>
                   <v-layout mb-5 mt-2>
                     <v-btn flat icon color="green lighten-2">
                       <v-icon class="iconfont" size="36">icon-weixin</v-icon>
@@ -90,7 +90,7 @@ export default {
       password: '',
       password1: '',
       password2: '',
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
       rules: {
         required: value => !!value || '该内容不能为空',
         min: value => value.length >= 8 || '最少需要输入8个字符',

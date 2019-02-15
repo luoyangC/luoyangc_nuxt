@@ -19,12 +19,21 @@
           <v-card-text>
             <v-layout column>
               <v-flex>
-                <v-text-field :value="user.username || '必填'" label="用户名称" readonly></v-text-field>
-                <v-text-field :value="user.email || '必填'" label="注册邮箱" readonly></v-text-field>
-                <v-text-field :value="user.birthday || '未设置'" label="用户生日" readonly></v-text-field>
-                <v-text-field :value="user.gender || '未设置'" label="用户性别" readonly></v-text-field>
-                <v-text-field :value="user.email || '未设置'" label="个人网站" readonly></v-text-field>
-                <v-textarea :value="user.profile || '该用户很懒，什么也没留下'" label="个人简介" readonly></v-textarea>
+                <v-text-field :value="user.username || '必填'" label="用户名称" readonly>
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-yonghu</v-icon>                  
+                </v-text-field>
+                <v-text-field :value="user.birthday || '未设置'" label="用户生日" readonly>
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-calendar</v-icon>
+                </v-text-field>
+                <v-text-field :value="user.gender || '未设置'" label="用户性别" readonly>
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-xingbie</v-icon>
+                </v-text-field>
+                <v-text-field :value="user.email || '未设置'" label="个人网站" readonly>
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-wangzhan</v-icon>
+                </v-text-field>
+                <v-textarea :value="user.profile || '该用户很懒，什么也没留下'" label="个人简介" readonly>
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-imagetext</v-icon>
+                </v-textarea>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -44,6 +53,11 @@ export default {
 
   async asyncData({ params, $axios }) {
     let {data} = await $axios.get(`/user/${params.id}/`)
+    
+    if (data.gender == 'male') data.gender = '男'
+    else if (data.gender == 'female') data.gender = '女'
+    else data.gender = '未知'
+
     return {
       user: data
     }

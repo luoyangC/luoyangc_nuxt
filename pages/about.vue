@@ -4,8 +4,8 @@
 
       <v-img :height="parallaxHeight" :src="currentImage">
         <v-layout column align-center justify-center fill-height dark-back>
-          <v-avatar size="150" color="grey lighten-4">
-            <img class="rotate" src="/icons/icon-a.png" alt="avatar">
+          <v-avatar size="100" color="grey lighten-4">
+            <img class="rotate" src="/icons/xigua.png" alt="avatar">
           </v-avatar>
           <h1 class="title-text font-weight-bold display-2 mb-3">Amor</h1>
         </v-layout>
@@ -59,7 +59,7 @@
             <ul>
               <li>QQ: 1769570627</li>
               <li>Phone: 15261829198</li>
-              <li>Email: 1769570627@qq.com</li>
+              <li>Email: luoyang0823@foxmail.com</li>
               <li>Gitee: <a href="https://gitee.com/luoyang_C">https://gitee.com/luoyang_C</a></li>
               <li>GitHub: <a href="https://github.com/luoyangC">https://github.com/luoyangC</a></li>
               <li>LeetCode: <a href="https://leetcode-cn.com/luoyangc">https://leetcode-cn.com/luoyangc</a></li>
@@ -88,7 +88,7 @@ export default {
   async asyncData({app}) {
     let imageId = app.store.getters.cartRandomImage[4] || 100
     return {
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
     }
   },
   

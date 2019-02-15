@@ -77,7 +77,7 @@ export default {
       snackbar: false,
       content: '',
       messages: data,
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
     }
   },
 

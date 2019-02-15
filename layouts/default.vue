@@ -1,7 +1,7 @@
 <template>
-  <v-app :dark="dark" v-scroll="onScroll" v-resize="onResize" :style="`font-size: ${fontSize}px`">
+  <v-app :dark="dark" v-scroll="onScroll" v-resize="onResize" :style="`font-size: ${fontSize}px`" :class="currentFont+' '+currentThem">
 
-    <v-navigation-drawer :clipped="clipped" v-model="drawer" width="350" temporary app @input="navigation">
+    <v-navigation-drawer :clipped="clipped" v-model="drawer" temporary app @input="navigation">
 
       <v-layout mt-3>
         <v-btn absolute left fab flat active-class="active-disabled" @click="setArticleParams('default')">
@@ -14,7 +14,7 @@
 
       <v-layout justify-center mt-5 mb-2>
         <v-hover v-if="currentUser.id">
-          <v-avatar slot-scope="{ hover }" size="100" color="grey lighten-4">
+          <v-avatar slot-scope="{ hover }" size="80" color="grey lighten-4">
             <img :src="currentUser.image" alt="avatar">
             <v-expand-transition>
               <v-card v-if="hover" class="transition-fast-in-fast-out v-card--reveal" ripple nuxt to="/user">
@@ -25,8 +25,8 @@
         </v-hover>
 
         <v-hover v-else>
-          <v-avatar slot-scope="{ hover }" size="100" color="grey lighten-4">
-            <img src="/icons/icon-a.png" alt="avatar">
+          <v-avatar slot-scope="{ hover }" size="80" color="grey lighten-4">
+            <img src="/icons/xigua.png" alt="avatar">
             <v-expand-transition>
               <v-card v-if="hover" class="transition-fast-in-fast-out v-card--reveal" ripple nuxt to="/login">
                 <v-icon large dark>fingerprint</v-icon>
@@ -41,30 +41,87 @@
       </v-layout>
 
       <v-layout class="nav-footer" justify-center>
-        <v-btn fab flat @click="dark = !dark; fontSlider = false; musicFrame = false">
-          <v-icon>brightness_medium</v-icon>
+        <v-btn fab flat @click="themSelect = !themSelect; fontSlider = false; fontSelect = false; musicFrame = false" title="背景主题">
+          <v-icon>format_paint</v-icon>
         </v-btn>
-        <v-btn fab flat @click="fontSlider = !fontSlider; musicFrame = false">
+        <v-btn fab flat @click="fontSlider = !fontSlider; themSelect = false; fontSelect = false; musicFrame = false" title="字体大小">
+          <v-icon>text_fields</v-icon>
+        </v-btn>
+        <v-btn fab flat @click="fontSelect = !fontSelect; themSelect = false; fontSlider = false; musicFrame = false" title="字体样式">
           <v-icon>font_download</v-icon>
         </v-btn>
-        <v-btn fab flat @click="musicFrame = !musicFrame; fontSlider = false">
+        <!-- <v-btn fab flat @click="musicFrame = !musicFrame; themSelect = false; fontSlider = false; fontSelect = false" title="背景音乐">
           <v-icon>queue_music</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-layout>
 
       <v-layout justify-center>
         <v-expand-transition>
-          <v-card flat class="transition-fast-in-fast-out font-slider" v-show="fontSlider" height="110" width="320" color="rgba(0,0,0,0)">
-            <v-slider v-model="fontSize" label="字体大小" thumb-label="always" thumb-size="24" min="10" max="30"></v-slider>
+          <v-card flat class="transition-fast-in-fast-out" v-show="themSelect" height="110" width="320" color="rgba(0,0,0,0)">
+            <v-layout fill-height justify-center align-center>
+              <v-btn-toggle v-model="themas" mandatory class="them-toggle">
+                <v-btn fab flat title="自动">
+                  <v-icon>brightness_auto</v-icon>
+                </v-btn>
+                <v-btn fab flat title="纯白">
+                  <v-icon>brightness_low</v-icon>
+                </v-btn>
+                <v-btn fab flat title="夜间">
+                  <v-icon>brightness_medium</v-icon>
+                </v-btn>
+                <v-btn fab flat title="碎花">
+                  <v-icon>brightness_high</v-icon>
+                </v-btn>
+              </v-btn-toggle>
+            </v-layout>
           </v-card>
         </v-expand-transition>
       </v-layout>
 
       <v-layout justify-center>
         <v-expand-transition>
-          <!-- <iframe class="transition-fast-in-fast-out" v-show="musicFrame" frameborder="no" border="0" marginwidth="0" marginheight="0" width=320 height=110 src="//music.163.com/outchain/player?type=0&id=2437500377&auto=0&height=90"></iframe> -->
+          <v-card flat class="transition-fast-in-fast-out font-slider" v-show="fontSlider" height="110" width="240" color="rgba(0,0,0,0)">
+            <v-slider v-model="fontSize" thumb-label="always" thumb-size="24" min="10" max="30"></v-slider>
+          </v-card>
         </v-expand-transition>
       </v-layout>
+
+      <v-layout justify-center>
+        <v-expand-transition>
+          <v-card flat class="transition-fast-in-fast-out" v-show="fontSelect" height="110" width="320" color="rgba(0,0,0,0)">
+            <v-layout fill-height justify-center align-center>
+              <v-btn-toggle v-model="fontFamily" mandatory class="font-toggle">
+                <v-btn flat>
+                  <v-layout column justify-center align-center>
+                    <div style="font-size: 25px" class="font-default">Ag</div>
+                    <div style="font-size: 12px; line-height: 1.35; margin-top: 4px;" class="font-default">默认</div>
+                  </v-layout>
+                </v-btn>
+                <v-btn flat>
+                  <v-layout column justify-center align-center>
+                    <div style="font-size: 25px" class="font-Serif">Ag</div>
+                    <div style="font-size: 12px; line-height: 1.35; margin-top: 4px;" class="font-Serif">衬线</div>
+                  </v-layout>
+                </v-btn>
+                <v-btn flat>
+                  <v-layout column justify-center align-center>
+                  <div style="font-size: 25px" class="font-mono">Ag</div>
+                  <div style="font-size: 12px; line-height: 1.35; margin-top: 4px;" class="font-mono">等宽</div>
+                  </v-layout>
+                </v-btn>
+              </v-btn-toggle>
+            </v-layout>
+          </v-card>
+        </v-expand-transition>
+      </v-layout>
+
+      <!-- <v-layout justify-center>
+        <v-expand-transition>
+          <v-card flat class="transition-fast-in-fast-out font-slider" v-show="musicFrame" height="110" width="320" color="rgba(0,0,0,0)">
+            <iframe class="transition-fast-in-fast-out" v-show="musicFrame" frameborder="no" border="0" marginwidth="0" marginheight="0" width=320 height=110 src="//music.163.com/outchain/player?type=0&id=2437500377&auto=0&height=90"></iframe>
+          </v-card>
+        </v-expand-transition>
+      </v-layout> -->
 
       <v-list style="background-color:rgba(0,0,0,0)">
 
@@ -108,13 +165,13 @@
     </v-navigation-drawer>
 
     <v-toolbar color="rgba(0,0,0,0)" :clipped-left="clipped" :dark="outParallax" flat fixed>
-      <v-toolbar-side-icon @click="drawer = !drawer"/>
+      <v-toolbar-side-icon @click="drawer = !drawer" :style="{ color: currentPage == '/' ? '#000' : '' }"/>
     </v-toolbar>
 
     <v-content>
       <nuxt/>
 
-      <live-card></live-card>
+      <live-card v-if="currentPage != '/'"></live-card>
 
       <v-btn fixed bottom right fab @click="arrowUp" :style="{'opacity':opacityUp}" color="rgba(255,255,255,.2)">
         <v-icon>arrow_upward</v-icon>
@@ -122,11 +179,11 @@
       
     </v-content>
 
-    <v-footer color="rgba(0,0,0,0)" height="100">
+    <v-footer color="rgba(0,0,0,0)" height="80" style="font-size:12px">
       <v-layout column justify-center align-center>
         <v-layout>&copy; 2019</v-layout>
         <v-layout justify-center align-center >
-          <v-img height="20" width="20" src="/icons/beiantubiao.ico"/>
+          <v-img height="18" width="18" src="/icons/beiantubiao.ico"/>
           <a href="http://www.miitbeian.gov.cn" rel="external nofollow">&nbsp;渝 ICP 备 18014351 号&nbsp;</a>
         </v-layout>
       </v-layout>
@@ -147,12 +204,16 @@ export default {
     return {
       search: '',
       title: "Amor的博客",
-      musicFrame: false,
+      themSelect: false,
       fontSlider: false,
+      fontSelect: false,
+      musicFrame: false,
+      themas: 0,
+      fontFamily: 0,
+      fontSize: 16,
       clipped: false,
       drawer: false,
       dark: false,
-      fontSize: 16,
       offsetTop: 0,
       archives: [],
       categories: [],
@@ -168,8 +229,10 @@ export default {
     // 侧边栏变化时回调函数
     navigation(e) {
       if (!e) {
+        this.themSelect = false
         this.fontSlider = false
         this.musicFrame = false
+        this.fontSelect = false
       }
     },
     // 根据时间自动切换夜间模式
@@ -177,9 +240,9 @@ export default {
       let now = new Date
       let hours = now.getHours()
       if (hours <= 6 || hours <= 18) {
-        this.dark = false
+        return false
       } else {
-        this.dark = true
+        return true
       }
     },
     // 回到顶部
@@ -198,11 +261,18 @@ export default {
     onResize() {
       this.$store.commit('setWindowSize', { x: window.innerWidth, y: window.innerHeight })
     },
+    // 初始化字体大小
+    setFontSize() {
+      let w = this.windowSize.x
+      if (w <= 600) this.fontSize = 12
+      else if (w > 600 && w <= 960) this.fontSize = 14
+      else this.fontSize = 16
+    },
     // 随机生成顶部图片
     randomImage() {
       let randomImage = []
       for (let index = 0; index < 10; index++) {
-        randomImage.push(Math.floor(Math.random() * (100 - 0)))
+        randomImage.push(Math.floor(Math.random() * 200))
       }
       this.$store.commit('setRandomImage', randomImage)
     },
@@ -239,6 +309,10 @@ export default {
     }
   },
   computed: {
+    // 是否为首页
+    currentPage() {
+      return this.$route.path
+    },
     // 计算回到顶部按钮是否显示
     opacityUp() {
       if (this.offsetTop < 1000) {
@@ -254,22 +328,45 @@ export default {
     // 计算滚动高度是否低于顶部图片高度
     outParallax() {
       let height = (this.windowSize.x + this.windowSize.y) / 4
-      if (this.offsetTop <= height) {
-        return 'dark'
+      if (this.offsetTop < height - 10) {
+        return true
       }
     },
     // 计算当前的登录用户
     currentUser() {
       return this.$store.getters.cartCurrentUser
+    },
+    // 计算当前字体
+    currentFont() {
+      if (this.fontFamily == 0) return 'font-default'
+      if (this.fontFamily == 1) return 'font-Serif'
+      if (this.fontFamily == 2) return 'font-mono'
+    },
+    currentThem() {
+      if (this.themas == 0) {
+        this.dark = this.autoDark()
+      }
+      if (this.themas == 1) {
+        this.dark = false
+        return 'them-default'
+      }
+      if (this.themas == 2) {
+        this.dark = true
+        return 'them-medium'
+      }
+      if (this.themas == 3) {
+        this.dark = false
+        return 'them-height'
+      }
     }
   },
   created() {
     this.randomImage()
-    this.autoDark()
     this.getData()
   },
   mounted() {
     this.onResize()
+    this.setFontSize()
   },
 };
 </script>
@@ -293,5 +390,35 @@ export default {
   border-radius 100px
   color #fff
   opacity .8
-</style>
 
+.them-toggle
+  box-shadow none !important
+  .v-btn
+    width 50px !important
+    height 50px !important
+    margin 0 5px
+  .v-btn--floating
+    border-radius: 50% !important
+
+.font-toggle
+  box-shadow none !important
+  .v-btn
+    height 60px
+    margin 0 10px
+  
+.font-default
+  font-family -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Apple Color Emoji, Arial, sans-serif, Segoe UI Emoji, Segoe UI Symbol
+.font-Serif
+  font-family Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif
+.font-mono
+  font-family Nitti, Microsoft YaHei, '微软雅黑', monospace
+
+.them-default
+  background-color #fff !important
+.them-medium
+  background-image url('/style/dark.png') !important
+  background-attachment fixed
+.them-height
+  background-image url('/style/light.png') !important
+  background-attachment fixed
+</style>

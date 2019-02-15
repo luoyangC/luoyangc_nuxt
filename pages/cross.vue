@@ -8,7 +8,7 @@
         <v-timeline dense align-top>
           <v-timeline-item v-for="dynamic in dynamics" :key="dynamic.id" small>
             <v-layout column>
-              <h1 class="headline font-weight-light mb-3" v-text="dynamic.create_time"></h1>
+              <h1 class="headline font-weight-light mb-3" v-text="dynamic.time"></h1>
               <p>{{dynamic.content}}</p>
             </v-layout>
           </v-timeline-item>
@@ -31,6 +31,8 @@
 
 <script>
 import JumbotronCard from '@/components/jumbotron-card'
+import moment from 'moment'
+
 export default {
   components: {
     JumbotronCard
@@ -39,9 +41,12 @@ export default {
   async asyncData({app, $axios}) {
     let imageId = app.store.getters.cartRandomImage[3] || 100
     let { data } = await $axios.get(`/dynamics/`)
+    data.forEach(element => {
+      element.time = moment(element.create_time).format('YYYY年MM月DD日')
+    })
     return {
       dynamics: data,
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/ims%20%28${imageId}%29.png`,
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
     }
   },
 

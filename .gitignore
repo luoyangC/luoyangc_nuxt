@@ -79,3 +79,9 @@ dist
 
 # IDE
 .idea
+
+.gitignore
+
+package-lock.json
+
+node_modules
