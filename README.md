@@ -20,7 +20,7 @@ online：<a href="hhttps://luoyangc.cn/" target="_blank" style="color: red;">htt
 
 ### Mobile
 
-![](https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/readme/TIM%E5%9B%BE%E7%89%8720190302172839.png)
+![](https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/readme/mobile_image.jpg)
 
 ## Build Setup
 
