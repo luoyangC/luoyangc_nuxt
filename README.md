@@ -14,8 +14,6 @@ online：<a href="hhttps://luoyangc.cn/" target="_blank" style="color: red;">htt
 
 ### PC
 
-![](https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/readme/pc_image2.png)
-
 ![](https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/readme/pc_image.png)
 
 ### Mobile
