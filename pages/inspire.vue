@@ -69,7 +69,7 @@ export default {
 
   methods: {
     async changePage(page) {
-      this.$vuetify.goTo(0, {duration: 1000, offset: this.parallaxHeight, easing: 'easeInOutCubic'})
+      this.$vuetify.goTo(this.parallaxHeight+5, {duration: 1000, offset: 0, easing: 'easeInOutCubic'})
       let { data } = await this.$axios.get('https' + page.slice(4))
       this.next = data.next
       this.prev = data.previous

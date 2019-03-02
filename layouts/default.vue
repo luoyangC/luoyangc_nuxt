@@ -26,7 +26,7 @@
 
         <v-hover v-else>
           <v-avatar slot-scope="{ hover }" size="80" color="grey lighten-4">
-            <img src="/icons/xigua.png" alt="avatar">
+            <img src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/xigua.png" alt="avatar">
             <v-expand-transition>
               <v-card v-if="hover" class="transition-fast-in-fast-out v-card--reveal" ripple nuxt to="/login">
                 <v-icon large dark>fingerprint</v-icon>
@@ -183,7 +183,7 @@
       <v-layout column justify-center align-center>
         <v-layout>&copy; 2019</v-layout>
         <v-layout justify-center align-center >
-          <v-img height="18" width="18" src="/icons/beiantubiao.ico"/>
+          <v-img height="18" width="18" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/beiantubiao.ico"/>
           <a href="http://www.miitbeian.gov.cn" rel="external nofollow">&nbsp;渝 ICP 备 18014351 号&nbsp;</a>
         </v-layout>
       </v-layout>

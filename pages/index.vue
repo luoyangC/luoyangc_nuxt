@@ -8,7 +8,7 @@
             {{sentence.lines[1]}}<br>
           </v-layout>
           <v-layout align-center justify-center>
-            <img height="30" width="30" src="/icons/yinzhang.png"/>
+            <img height="30" width="30" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/yinzhang.png"/>
           </v-layout>
         </v-layout>
       </v-card-title>

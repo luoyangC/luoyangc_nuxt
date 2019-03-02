@@ -5,7 +5,7 @@
       <v-img :height="parallaxHeight" :src="currentImage">
         <v-layout column align-center justify-center fill-height dark-back>
           <v-avatar size="100" color="grey lighten-4">
-            <img class="rotate" src="/icons/xigua.png" alt="avatar">
+            <img class="rotate" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/xigua.png" alt="avatar">
           </v-avatar>
           <h1 class="title-text font-weight-bold display-2 mb-3">Amor</h1>
         </v-layout>

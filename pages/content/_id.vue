@@ -5,9 +5,11 @@
 
     <v-layout wrap justify-center>
 
-      <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2>
+      <V-flex xs12 sm10 md8 lg6 xl6 ml-2 mr-2 style="height:0">
+        <v-img class="auth-avatar" :width="avatarSize" :height="avatarSize" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/xg.png"/>
+      </V-flex>
 
-        <V-layout class="auth-avatar" :style="{'font-size':smallSize}">{{emojis[0]}}</V-layout>
+      <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2>
 
         <v-card flat>
 
@@ -93,7 +95,6 @@ export default {
       comment: '',
       snackbar: false,
       success: '',
-      emojis: ['🍉','🍒','🍄','🌰','🍊','🍋','❤️','🍓','😗','😋']
     };
   },
 
@@ -110,9 +111,9 @@ export default {
     articleTime() {
       return moment(this.article.update_time).format('YYYY 年 MM 月 DD 日')
     },
-    smallSize() {
-      if (this.windowSize.x <= 600) return '64px'
-      else return '76px'
+    avatarSize() {
+      if (this.windowSize.x <= 600) return 76
+      else return 86
     }
   },
 
@@ -148,7 +149,7 @@ export default {
 .auth-avatar
   position relative
   z-index 1
-  top -100px
+  top -90px
   height 0
   width 5em
   line-height 1.1
@@ -184,6 +185,7 @@ export default {
   code:before, code:after
       content ''
   pre
+    overflow-x auto
     padding 0 !important
     border solid 1px #e1e4e5
     background-color #f8f8f8 !important
