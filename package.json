@@ -11,17 +11,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.0.0",
-    "cookie-universal-nuxt": "^2.0.14",
-    "cross-env": "^5.2.0",
-    "highlight.js": "^9.13.1",
-    "koa": "^2.5.2",
-    "markdown-it": "^8.4.2",
-    "moment": "^2.24.0",
-    "nuxt": "~2.3.0  ",
-    "vuetify": "^1.2.4",
-    "nodemon": "^1.11.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "@nuxtjs/axios": "5.0.0",
+    "cookie-universal-nuxt": "2.0.14",
+    "cross-env": "5.2.0",
+    "highlight.js": "9.13.1",
+    "koa": "2.5.2",
+    "markdown-it": "8.4.2",
+    "moment": "2.24.0",
+    "nodemon": "1.11.0",
+    "nuxt": "2.8.1",
+    "stylus": "0.54.5",
+    "stylus-loader": "3.0.2",
+    "vuetify": "1.5.16"
   }
 }
