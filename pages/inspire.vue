@@ -46,8 +46,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ArticleCard from '@/components/article-card'
-
 export default {
 
   components: {
@@ -55,9 +55,9 @@ export default {
   },
 
   async asyncData({app, store, $axios}) {
-    let imageId = app.store.getters.cartRandomImage[0] || 100
+    let imageId = app.store.getters['app/randomImage'][0] || 100
     let sentence = await $axios.get(`/sentence/`)
-    let articles = await $axios.get(`/article/`, {params: store.getters.cartArticleParams})
+    let articles = await $axios.get(`/article/`, {params: store.getters['artocle/articleParams']})
     return {
       next: articles.data.next,
       prev: articles.data.previous,
@@ -78,9 +78,12 @@ export default {
   },
 
   computed: {
-    windowSize() {
-      return this.$store.state.windowSize
-    },
+    ...mapGetters('app', [
+      'windowSize'
+    ]),
+    ...mapGetters('article', [
+      'articleParams'
+    ]),
     parallaxHeight() {
       return (this.windowSize.x + this.windowSize.y) / 4
     },
@@ -91,9 +94,6 @@ export default {
     randomSentence() {
       let sentenceId = Math.floor(Math.random() * (this.sentence.length - 0))
       return this.sentence[sentenceId].lines
-    },
-    articleParams() {
-      return this.$store.getters.cartArticleParams
     }
   },
 

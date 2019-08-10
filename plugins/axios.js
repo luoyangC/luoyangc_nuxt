@@ -8,8 +8,8 @@ export default ({ app }) => {
   axios.defaults.baseURL = 'https://luoyangc.cn/api/'
 
   axios.onRequest(config => {
-    let token = app.$cookies.get('token')
-    if (token) config.headers.Authorization = 'JWT' + ' ' + app.$cookies.get('token')
+    const token = app.$cookies.get('token')
+    if (token) config.headers.Authorization = 'JWT' + ' ' + token
     config.data = qs.stringify(config.data, { allowDots: true })
     return config
   })
@@ -35,5 +35,4 @@ export default ({ app }) => {
     }
     return Promise.reject(error.response)
   })
-
 }

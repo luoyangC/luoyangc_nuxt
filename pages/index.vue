@@ -24,8 +24,8 @@
 
 <script>
 export default {
-  async asyncData({$axios}) {
-    let {data} = await $axios.get(`/sentence/1/`)
+  async asyncData({ $axios }) {
+    let { data } = await $axios.get(`/sentence/1/`) //  获取第定场诗一个句
     return {
       sentence: data
     }
@@ -38,6 +38,6 @@ export default {
   -webkit-writing-mode vertical-rl
   writing-mode vertical-rl
   padding-bottom 30px
-  font-family STXingkai, FangSong, SimSun !important
+  font-family 'cyjianxk1b1e1f50f3204ff'
   font-size 2.0em
 </style>
