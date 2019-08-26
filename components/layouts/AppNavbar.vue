@@ -2,7 +2,7 @@
  * @Author: luoyang
  * @Date: 2019-08-10 14:19:06
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-24 16:17:52
+ * @Last Modified time: 2019-08-26 23:14:35
  */
 <template>
   <v-navigation-drawer :clipped="clipped" :value="drawer" temporary app @input="navigation">
@@ -15,7 +15,7 @@
     <!-- 侧栏工具 -->
     <navbar-option />
     <!-- 侧栏导航 -->
-    <navbar-list />
+    <navbar-list @params="setArticleParams" />
   </v-navigation-drawer>
 </template>
 

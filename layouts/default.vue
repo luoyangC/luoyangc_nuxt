@@ -4,7 +4,7 @@
     v-resize="onResize"
     :dark="dark"
     :style="`font-size: ${fontSize}px`"
-    :class="{them, font}"
+    :class="[them, fontFamily]"
   >
     <!-- app侧边栏 -->
     <app-navbar />
@@ -32,8 +32,8 @@ export default {
   },
   computed: {
     ...mapGetters('app', [
+      'fontFamily',
       'fontSize',
-      'font',
       'them',
       'dark'
     ])
@@ -75,38 +75,6 @@ export default {
 </script>
 
 <style lang="stylus">
-
-.font-slider
-  display flex
-  align-items flex-end
-
-.v-card--reveal
-  position absolute
-  top 0
-  align-items center
-  justify-content center
-  width 100%
-  height 100%
-  background-color #000 !important
-  border-radius 100px
-  color #fff
-  opacity .8
-
-.them-toggle
-  box-shadow none !important
-  .v-btn
-    width 50px !important
-    height 50px !important
-    margin 0 5px
-  .v-btn--floating
-    border-radius: 50% !important
-
-.font-toggle
-  box-shadow none !important
-  .v-btn
-    height 60px
-    margin 0 10px
-
 .font-default
   font-family -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Apple Color Emoji, Arial, sans-serif, Segoe UI Emoji, Segoe UI Symbol
 .font-Serif

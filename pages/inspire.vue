@@ -68,14 +68,11 @@ export default {
 
   computed: {
     ...mapGetters('app', [
-      'windowSize'
+      'parallaxHeight'
     ]),
     ...mapGetters('article', [
       'articleParams'
     ]),
-    parallaxHeight() {
-      return (this.windowSize.x + this.windowSize.y) / 4
-    },
     articleHeight() {
       if (this.windowSize.x < 960) return 200
       else return 250

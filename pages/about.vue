@@ -1,17 +1,13 @@
 <template>
   <v-layout column>
-    <v-layout column justify-center mb-5>
-
-      <v-img :height="parallaxHeight" :src="currentImage">
-        <v-layout column align-center justify-center fill-height dark-back>
-          <v-avatar size="100" color="grey lighten-4">
-            <img class="rotate" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/xigua.png" alt="avatar">
-          </v-avatar>
-          <h1 class="title-text font-weight-bold display-2 mb-3">Amor</h1>
-        </v-layout>
-      </v-img>
-    </v-layout>
-
+    <!-- 顶部图片 -->
+    <jumbotron-card :height="parallaxHeight" :image="currentImage">
+      <v-avatar size="100" color="grey lighten-4">
+        <img class="rotate" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/xigua.png" alt="avatar">
+      </v-avatar>
+      <h1 class="title-text font-weight-bold display-2 mb-3">Amor</h1>
+    </jumbotron-card>
+    <!-- 文字介绍 -->
     <v-layout wrap justify-center>
       <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2>
         <v-card flat>
@@ -32,7 +28,6 @@
           </v-card-text>
         </v-card>
       </v-flex>
-
       <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2>
         <v-card flat>
           <v-card-title>
@@ -49,7 +44,6 @@
           </v-card-text>
         </v-card>
       </v-flex>
-
       <v-flex xs12 sm10 md8 lg6 xl6 mb-5 mt-2 ml-2 mr-2>
         <v-card flat>
           <v-card-title>
@@ -67,34 +61,28 @@
           </v-card-text>
         </v-card>
       </v-flex>
-
     </v-layout>
-
-    <v-layout justify-center>
-      <v-flex xs12 sm10 md8 lg6 xl6>
-        <v-layout justify-space-between>
-          <v-btn round outline nuxt to="/cross">动态</v-btn>
-          <v-spacer />
-          <v-btn round outline nuxt to="/inspire">文章</v-btn>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-
+    <!-- 底部导航 -->
+    <page-bottom prev="/cross" next="/inspire" prev-name="动态" next-name="文章" />
   </v-layout>
 </template>
 
 <script>
+import JumbotronCard from '@/components/jumbotron-card'
+import PageBottom from '@/components/PageBottom'
+import { mapGetters } from 'vuex'
 export default {
+  components: {
+    JumbotronCard,
+    PageBottom
+  },
   computed: {
-    windowSize() {
-      return this.$store.state.windowSize
-    },
-    parallaxHeight() {
-      return (this.windowSize.x + this.windowSize.y) / 4
-    }
+    ...mapGetters('app', [
+      'parallaxHeight'
+    ])
   },
   async asyncData({ app }) {
-    const imageId = app.store.getters.cartRandomImage[4] || 100
+    const imageId = app.store.getters['app/randomImage'][4] || 100
     return {
       currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`
     }

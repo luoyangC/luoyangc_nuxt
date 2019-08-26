@@ -16,39 +16,28 @@
       </v-flex>
     </v-layout>
 
-    <v-layout justify-center>
-      <v-flex xs12 sm10 md8 lg6 xl6>
-        <v-layout justify-space-between>
-          <v-btn round outline nuxt to="/message">留言</v-btn>
-          <v-spacer />
-          <v-btn round outline nuxt to="/about">关于</v-btn>
-        </v-layout>
-      </v-flex>
-    </v-layout>
+    <page-bottom prev="/message" next="/about" prev-name="留言" next-name="关于" />
 
   </v-layout>
 </template>
 
 <script>
 import JumbotronCard from '@/components/jumbotron-card'
+import PageBottom from '@/components/PageBottom'
 import moment from 'moment'
-
+import { mapGetters } from 'vuex'
 export default {
   components: {
-    JumbotronCard
+    JumbotronCard,
+    PageBottom
   },
-
   computed: {
-    windowSize() {
-      return this.$store.state.windowSize
-    },
-    parallaxHeight() {
-      return (this.windowSize.x + this.windowSize.y) / 4
-    }
+    ...mapGetters('app', [
+      'parallaxHeight'
+    ])
   },
-
   async asyncData({ app, $axios }) {
-    const imageId = app.store.getters.cartRandomImage[3] || 100
+    const imageId = app.store.getters['app/randomImage'][3] || 100
     const { data } = await $axios.get(`/dynamics/`)
     data.forEach(element => {
       element.time = moment(element.create_time).format('YYYY年MM月DD日')

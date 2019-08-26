@@ -10,7 +10,7 @@
       <v-layout>&copy; 2019</v-layout>
       <v-layout justify-center align-center>
         <v-img height="18" width="18" src="https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/icons/beiantubiao.ico" />
-        <a href="http://www.miitbeian.gov.cn" rel="external nofollow">&nbsp;渝 ICP 备 18014351 号&nbsp;</a>
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow">&nbsp;渝 ICP 备 18014351 号&nbsp;</a>
       </v-layout>
     </v-layout>
   </v-footer>

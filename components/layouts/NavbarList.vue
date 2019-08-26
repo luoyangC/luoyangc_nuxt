@@ -2,7 +2,7 @@
  * @Author: luoyang
  * @Date: 2019-08-10 16:56:18
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-24 12:34:27
+ * @Last Modified time: 2019-08-26 23:15:01
  */
 <template>
   <v-list style="background-color:rgba(0,0,0,0)">
@@ -11,13 +11,7 @@
         <v-list-tile-title class="text-xs-center">归档</v-list-tile-title>
       </v-list-tile>
 
-      <v-list-tile
-        v-for="(item, i) in archives"
-        :key="i"
-        router
-        exact
-        @click="handleParams('time', item)"
-      >
+      <v-list-tile v-for="(item, i) in archives" :key="i" router exact @click="handleParams('time', item)">
         <v-list-tile-content>
           <v-list-tile-title class="text-xs-center" v-text="item" />
         </v-list-tile-content>
@@ -29,14 +23,7 @@
         <v-list-tile-title class="text-xs-center">分类</v-list-tile-title>
       </v-list-tile>
 
-      <v-list-tile
-        v-for="(item, i) in categories"
-        :key="i"
-        :to="item.to"
-        router
-        exact
-        @click="handleParams('category', item.id)"
-      >
+      <v-list-tile v-for="(item, i) in categories" :key="i" :to="item.to" router exact @click="handleParams('category', item.id)">
         <v-list-tile-content>
           <v-list-tile-title class="text-xs-center" v-text="item.title" />
         </v-list-tile-content>

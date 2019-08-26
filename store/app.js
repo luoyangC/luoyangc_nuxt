@@ -2,7 +2,7 @@
  * @Author: luoyang
  * @Date: 2019-08-10 17:01:30
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-24 16:26:49
+ * @Last Modified time: 2019-08-26 23:25:36
  */
 
 // 根据时间自动切换夜间模式
@@ -19,8 +19,8 @@ const autoDark = () => {
 export const state = () => ({
   clipped: false,
   drawer: false,
-  them: '',
-  font: '',
+  them: 'them-default',
+  fontFamily: 'font-default',
   dark: false,
   fontSize: 14,
   offsetTop: 0,
@@ -33,19 +33,20 @@ export const getters = {
   clipped: state => state.clipped,
   dark: state => state.dark,
   them: state => state.them,
-  font: state => state.font,
+  fontFamily: state => state.fontFamily,
   windowSize: state => state.windowSize,
   randomImage: state => state.randomImage,
   offsetTop: state => state.offsetTop,
-  fontSize: state => state.fontSize
+  fontSize: state => state.fontSize,
+  parallaxHeight: state => (state.windowSize.x + state.windowSize.y) / 4
 }
 
 export const mutations = {
   SET_THEM(state, data) {
     state.them = data
   },
-  SET_FONT(state, data) {
-    state.font = data
+  SET_FONTFAMILY(state, data) {
+    state.fontFamily = data
   },
   SET_DARK(state, data) {
     state.dark = data
@@ -70,12 +71,6 @@ export const mutations = {
 export const actions = {
   setWindowSize(context, data) {
     context.commit('SET_WINDOW_SIZE', data)
-    const _width = data.x
-    let _size
-    if (_width <= 600) _size = 12
-    else if (_width > 600 && _width <= 960) _size = 14
-    else _size = 16
-    context.commit('SET_FONT_SIZE', _size)
   },
   setRandomImage(context) {
     const randomImage = []
@@ -90,8 +85,14 @@ export const actions = {
   setFontSize(context, data) {
     context.commit('SET_FONT_SIZE', data)
   },
-  setFont(context, data) {
-    context.commit('SET_FONT', data)
+  setFontFamily(context, data) {
+    let fontFamily = 'font-default'
+    if (data === 1) {
+      fontFamily = 'font-Serif'
+    } else if (data === 2) {
+      fontFamily = 'font-mono'
+    }
+    context.commit('SET_FONTFAMILY', fontFamily)
   },
   setDrawer(context, data) {
     context.commit('SET_DRAWER', data)
@@ -99,20 +100,17 @@ export const actions = {
   setThem(context, data) {
     let them = ''
     let dark = false
-    if (data === 0) {
-      dark = autoDark()
-    }
     if (data === 1) {
       dark = false
       them = 'them-default'
-    }
-    if (data === 2) {
+    } else if (data === 2) {
       dark = true
       them = 'them-medium'
-    }
-    if (data === 3) {
+    } else if (data === 3) {
       dark = false
       them = 'them-height'
+    } else {
+      dark = autoDark()
     }
     context.commit('SET_THEM', them)
     context.commit('SET_DARK', dark)

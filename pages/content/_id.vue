@@ -59,9 +59,8 @@ import JumbotronCard from '@/components/jumbotron-card'
 import CommentCard from '@/components/comment-card'
 import moment from 'moment'
 import { md } from '@/static/js/markdown-it'
-
+import { mapGetters } from 'vuex'
 export default {
-
   head() {
     return {
       title: this.article.title,
@@ -72,26 +71,20 @@ export default {
       ]
     }
   },
-
+  validate({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     JumbotronCard,
     CommentCard
   },
-
-  validate({ params }) {
-    return /^\d+$/.test(params.id)
-  },
-
   computed: {
-    windowSize() {
-      return this.$store.state.windowSize
-    },
-    parallaxHeight() {
-      return (this.windowSize.x + this.windowSize.y) / 4 || 300
-    },
-    currentUser() {
-      return this.$store.getters.cartCurrentUser
-    },
+    ...mapGetters('app', [
+      'parallaxHeight'
+    ]),
+    ...mapGetters('user', [
+      'currentUser'
+    ]),
     articleTime() {
       return moment(this.article.update_time).format('YYYY 年 MM 月 DD 日')
     },

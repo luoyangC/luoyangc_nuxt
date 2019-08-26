@@ -47,7 +47,7 @@
 
     <v-snackbar v-model="snackbar" top color="success" auto-height>{{ success }}</v-snackbar>
 
-    <v-layout justify-center>
+    <!-- <v-layout justify-center>
       <v-flex xs12 sm10 md8 lg6 xl6>
         <v-layout justify-space-between>
           <v-btn round outline nuxt to="/archives">记录</v-btn>
@@ -55,36 +55,35 @@
           <v-btn round outline nuxt to="/cross">动态</v-btn>
         </v-layout>
       </v-flex>
-    </v-layout>
-
+    </v-layout> -->
+    <page-bottom prev="/archives" next="/cross" prev-name="记录" next-name="动态" />
   </v-layout>
 </template>
 
 <script>
 import JumbotronCard from '@/components/jumbotron-card'
-
+import PageBottom from '@/components/PageBottom'
+import { mapGetters } from 'vuex'
 export default {
   components: {
-    JumbotronCard
+    JumbotronCard,
+    PageBottom
   },
 
   computed: {
-    windowSize() {
-      return this.$store.state.windowSize
-    },
-    parallaxHeight() {
-      return (this.windowSize.x + this.windowSize.y) / 4
-    },
+    ...mapGetters('app', [
+      'parallaxHeight'
+    ]),
+    ...mapGetters('user', [
+      'currentUser'
+    ]),
     lastMessageId() {
       return this.messages[this.messages.length - 1].id
-    },
-    currentUser() {
-      return this.$store.getters.cartCurrentUser
     }
   },
 
   async asyncData({ app, $axios }) {
-    const imageId = app.store.getters.cartRandomImage[2] || 100
+    const imageId = app.store.getters['app/randomImage'][2] || 100
     const { data } = await $axios.get(`/message/`)
     console.log(data)
     return {
