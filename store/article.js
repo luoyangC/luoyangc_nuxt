@@ -1,8 +1,8 @@
 /*
- * @Author: luoyang 
- * @Date: 2019-08-10 17:01:30 
+ * @Author: luoyang
+ * @Date: 2019-08-10 17:01:30
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-10 18:42:15
+ * @Last Modified time: 2019-08-24 15:51:44
  */
 export const state = () => ({
   articleParams: {},

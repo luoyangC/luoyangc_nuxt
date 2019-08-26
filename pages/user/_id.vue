@@ -5,7 +5,7 @@
       <v-flex xs12 sm10 md8 lg6 xl4 mb-5 mt-2 ml-2 mr-2>
 
         <v-card flat dark>
-          <v-img :src="user.image"  aspect-ratio="2">
+          <v-img :src="user.image" aspect-ratio="2">
             <v-layout column fill-height justify-center align-center dark-back>
               <v-avatar size="100" color="grey lighten-4">
                 <img class="rotate" :src="user.image" alt="avatar">
@@ -20,7 +20,7 @@
             <v-layout column>
               <v-flex>
                 <v-text-field :value="user.username || '必填'" label="用户名称" readonly>
-                  <v-icon slot="prepend" class="iconfont" size="24">icon-yonghu</v-icon>                  
+                  <v-icon slot="prepend" class="iconfont" size="24">icon-yonghu</v-icon>
                 </v-text-field>
                 <v-text-field :value="user.birthday || '未设置'" label="用户生日" readonly>
                   <v-icon slot="prepend" class="iconfont" size="24">icon-calendar</v-icon>
@@ -52,15 +52,15 @@ export default {
   },
 
   async asyncData({ params, $axios }) {
-    let {data} = await $axios.get(`/user/${params.id}/`)
-    
-    if (data.gender == 'male') data.gender = '男'
-    else if (data.gender == 'female') data.gender = '女'
+    const { data } = await $axios.get(`/user/${params.id}/`)
+
+    if (data.gender === 'male') data.gender = '男'
+    else if (data.gender === 'female') data.gender = '女'
     else data.gender = '未知'
 
     return {
       user: data
     }
-  },
+  }
 }
 </script>

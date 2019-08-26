@@ -1,8 +1,8 @@
 /*
- * @Author: luoyang 
- * @Date: 2019-08-10 17:21:19 
+ * @Author: luoyang
+ * @Date: 2019-08-10 17:21:19
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-10 17:22:02
+ * @Last Modified time: 2019-08-24 15:51:36
  */
 export const state = () => ({
   currentUser: { id: null, image: '/icons/xigua.png' }

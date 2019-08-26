@@ -1,20 +1,19 @@
 <template>
-  <v-app 
+  <v-app
     v-scroll="onScroll"
     v-resize="onResize"
     :dark="dark"
     :style="`font-size: ${fontSize}px`"
     :class="{them, font}"
   >
-
-    <app-navbar />    
-
+    <!-- app侧边栏 -->
+    <app-navbar />
+    <!-- app顶栏 -->
     <app-toolbar />
-
+    <!-- app主体 -->
     <app-main />
-
+    <!-- app底栏 -->
     <app-footer />
-
   </v-app>
 </template>
 
@@ -30,6 +29,22 @@ export default {
     AppNavbar,
     AppToolbar,
     AppFooter
+  },
+  computed: {
+    ...mapGetters('app', [
+      'fontSize',
+      'font',
+      'them',
+      'dark'
+    ])
+  },
+  created() {
+    this.initThem()
+    this.getUserInfo()
+    this.randomImage()
+  },
+  mounted() {
+    this.onResize()
   },
   methods: {
     // 页面滚动时回调函数
@@ -50,35 +65,16 @@ export default {
     initThem() {
       this.$store.dispatch('app/setThem', 0)
     },
-    // 获取接口数据
-    async getData() {
-      // 获取用户信息
+    // 获取用户信息
+    async getUserInfo() {
       const { data } = await this.$axios.get(`/user/`)
       this.$store.dispatch('user/setCurrentUser', data)
     }
-  },
-  computed: {
-    ...mapGetters('app', [
-      'fontSize',
-      'font',
-      'them',
-      'dark'
-    ])
-  },
-  created() {
-    this.initThem()
-    this.getData()
-    this.randomImage()
-  },
-  mounted() {
-    this.onResize()
-  },
-};
+  }
+}
 </script>
 
 <style lang="stylus">
-.v-navigation-drawer
-  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important
 
 .font-slider
   display flex
@@ -110,7 +106,7 @@ export default {
   .v-btn
     height 60px
     margin 0 10px
-  
+
 .font-default
   font-family -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Apple Color Emoji, Arial, sans-serif, Segoe UI Emoji, Segoe UI Symbol
 .font-Serif

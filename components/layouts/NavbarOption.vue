@@ -1,8 +1,8 @@
 /*
- * @Author: luoyang 
- * @Date: 2019-08-10 14:41:47 
+ * @Author: luoyang
+ * @Date: 2019-08-10 14:41:47
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-10 14:51:33
+ * @Last Modified time: 2019-08-24 12:34:34
  */
 <template>
   <div>
@@ -21,9 +21,9 @@
     <v-layout justify-center>
       <v-expand-transition>
         <v-card
+          v-show="active === 1"
           flat
           class="transition-fast-in-fast-out"
-          v-show="active === 1"
           height="110"
           width="320"
           color="rgba(0,0,0,0)"
@@ -51,14 +51,14 @@
     <v-layout justify-center>
       <v-expand-transition>
         <v-card
+          v-show="active === 2"
           flat
           class="transition-fast-in-fast-out font-slider"
-          v-show="active === 2"
           height="110"
           width="240"
           color="rgba(0,0,0,0)"
         >
-          <v-slider v-model="fontSize" thumb-label="always" thumb-size="24" min="10" max="30"></v-slider>
+          <v-slider v-model="fontSize" thumb-label="always" thumb-size="24" min="10" max="30" />
         </v-card>
       </v-expand-transition>
     </v-layout>
@@ -66,9 +66,9 @@
     <v-layout justify-center>
       <v-expand-transition>
         <v-card
+          v-show="active === 3"
           flat
           class="transition-fast-in-fast-out"
-          v-show="active === 3"
           height="110"
           width="320"
           color="rgba(0,0,0,0)"
@@ -117,7 +117,7 @@ export default {
     active: 0,
     themas: 0,
     fontFamily: 0,
-    fontSize: 16,
+    fontSize: 16
   })
 }
 </script>

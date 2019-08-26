@@ -1,13 +1,13 @@
 /*
- * @Author: luoyang 
- * @Date: 2019-08-10 17:01:30 
+ * @Author: luoyang
+ * @Date: 2019-08-10 17:01:30
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-10 18:54:30
+ * @Last Modified time: 2019-08-24 16:26:49
  */
 
 // 根据时间自动切换夜间模式
 const autoDark = () => {
-  const now = new Date
+  const now = new Date()
   const hours = now.getHours()
   if (hours <= 6 || hours <= 18) {
     return false
@@ -25,7 +25,7 @@ export const state = () => ({
   fontSize: 14,
   offsetTop: 0,
   randomImage: [],
-  windowSize: {x: 0, y: 0}
+  windowSize: { x: 0, y: 0 }
 })
 
 export const getters = {
@@ -35,7 +35,7 @@ export const getters = {
   them: state => state.them,
   font: state => state.font,
   windowSize: state => state.windowSize,
-  randomImage: state => state.windowSize,
+  randomImage: state => state.randomImage,
   offsetTop: state => state.offsetTop,
   fontSize: state => state.fontSize
 }

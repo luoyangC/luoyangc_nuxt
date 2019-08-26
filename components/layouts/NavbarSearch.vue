@@ -1,8 +1,8 @@
 /*
- * @Author: luoyang 
- * @Date: 2019-08-10 14:35:15 
+ * @Author: luoyang
+ * @Date: 2019-08-10 14:35:15
  * @Last Modified by: luoyang
- * @Last Modified time: 2019-08-10 19:11:00
+ * @Last Modified time: 2019-08-24 12:34:41
  */
 <template>
   <v-layout pl-3 pr-3>
@@ -11,7 +11,7 @@
       label="输入关键词搜索"
       append-icon="search"
       @keydown.enter="handleSearch"
-    ></v-text-field>
+    />
   </v-layout>
 </template>
 

@@ -1,7 +1,6 @@
 import qs from 'qs'
 
 export default ({ app }) => {
-
   const axios = app.$axios
 
   axios.defaults.timeout = 5000
@@ -13,11 +12,11 @@ export default ({ app }) => {
     config.data = qs.stringify(config.data, { allowDots: true })
     return config
   })
-  
+
   axios.onResponse(response => {
     return Promise.resolve(response)
   })
-  
+
   axios.onError(error => {
     switch (error.response.status) {
       case 400:

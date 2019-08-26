@@ -45,8 +45,8 @@ module.exports = {
   */
   plugins: [
     { src: '@/plugins/vuetify', ssr: true },
-    { src: "@/plugins/axios", ssr: true },
-    { src: '@/static/font/iconfont.js', ssr: false },
+    { src: '@/plugins/axios', ssr: true },
+    { src: '@/static/font/iconfont.js', ssr: false }
   ],
 
   /*
@@ -55,7 +55,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt',
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration
@@ -71,7 +71,15 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: [/(node_modules)/, /(static)/]
+        })
+      }
     }
   }
 }

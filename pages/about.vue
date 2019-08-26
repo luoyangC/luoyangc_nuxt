@@ -74,7 +74,7 @@
       <v-flex xs12 sm10 md8 lg6 xl6>
         <v-layout justify-space-between>
           <v-btn round outline nuxt to="/cross">动态</v-btn>
-          <v-spacer/>
+          <v-spacer />
           <v-btn round outline nuxt to="/inspire">文章</v-btn>
         </v-layout>
       </v-flex>
@@ -85,13 +85,6 @@
 
 <script>
 export default {
-  async asyncData({app}) {
-    let imageId = app.store.getters.cartRandomImage[4] || 100
-    return {
-      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`,
-    }
-  },
-  
   computed: {
     windowSize() {
       return this.$store.state.windowSize
@@ -100,5 +93,11 @@ export default {
       return (this.windowSize.x + this.windowSize.y) / 4
     }
   },
+  async asyncData({ app }) {
+    const imageId = app.store.getters.cartRandomImage[4] || 100
+    return {
+      currentImage: `https://luoyangc.oss-cn-shanghai.aliyuncs.com/media/image/random/${imageId}.png`
+    }
+  }
 }
 </script>

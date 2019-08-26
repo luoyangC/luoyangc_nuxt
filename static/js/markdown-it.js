@@ -4,13 +4,15 @@ export const md = require('markdown-it')({
   breaks: true,
   linkify: true,
   typographer: true,
-  highlight: function (str, lang) {
+  highlight: function(str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return '<pre class="hljs"><code>' +
                hljs.highlight(lang, str, true).value +
                '</code></pre>'
-      } catch (__) {}
+      } catch (__) {
+        console.log('')
+      }
     }
     return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
   }
