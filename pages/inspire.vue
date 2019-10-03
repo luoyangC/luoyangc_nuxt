@@ -68,7 +68,8 @@ export default {
 
   computed: {
     ...mapGetters('app', [
-      'parallaxHeight'
+      'parallaxHeight',
+      'windowSize'
     ]),
     ...mapGetters('article', [
       'articleParams'
