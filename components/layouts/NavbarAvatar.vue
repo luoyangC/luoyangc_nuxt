@@ -41,3 +41,16 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.v-card--reveal
+  align-items: center
+  bottom: 0
+  justify-content: center
+  opacity: .5
+  position: absolute
+  width: 100%
+  height: 100%;
+  border-radius: 50%
+  background-color: #333
+</style>

@@ -3,7 +3,7 @@
     <v-card color="transparent" flat>
       <v-card-title>
         <v-layout column mb-2>
-          <v-layout align-center align-text>
+          <v-layout align-center align-text css1c87221934204ff>
             {{ sentence.lines[0] }}<br>
             {{ sentence.lines[1] }}<br>
           </v-layout>
@@ -40,6 +40,5 @@ export default {
   -webkit-writing-mode vertical-rl
   writing-mode vertical-rl
   padding-bottom 30px
-  font-family 'cyjianxk1b1e1f50f3204ff'
   font-size 2.0em
 </style>
