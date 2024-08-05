@@ -19,7 +19,7 @@
     "markdown-it": "8.4.2",
     "moment": "2.24.0",
     "nodemon": "1.11.0",
-    "nuxt": "2.8.1",
+    "nuxt": "3.12.4",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.2",
     "vuetify": "1.5.16"
